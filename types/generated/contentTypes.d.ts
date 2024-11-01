@@ -388,7 +388,17 @@ export interface ApiClassroomClassroom extends Schema.CollectionType {
     description: Attribute.Text;
     name: Attribute.String & Attribute.Required;
     publishedAt: Attribute.DateTime;
+    students: Attribute.Relation<
+      'api::classroom.classroom',
+      'manyToMany',
+      'api::student.student'
+    >;
     studentsLength: Attribute.Integer;
+    teachers: Attribute.Relation<
+      'api::classroom.classroom',
+      'manyToMany',
+      'api::teacher.teacher'
+    >;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::classroom.classroom',
@@ -434,6 +444,11 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
     directorPhone: Attribute.String & Attribute.Private;
     name: Attribute.String & Attribute.Required;
     publishedAt: Attribute.DateTime;
+    teachers: Attribute.Relation<
+      'api::department.department',
+      'manyToMany',
+      'api::teacher.teacher'
+    >;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::department.department',
@@ -447,6 +462,7 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
 export interface ApiStudentStudent extends Schema.CollectionType {
   collectionName: 'students';
   info: {
+    description: '';
     displayName: 'Student';
     pluralName: 'students';
     singularName: 'student';
@@ -456,6 +472,11 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   };
   attributes: {
     birthdate: Attribute.Date;
+    classrooms: Attribute.Relation<
+      'api::student.student',
+      'manyToMany',
+      'api::classroom.classroom'
+    >;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::student.student',
@@ -487,6 +508,7 @@ export interface ApiStudentStudent extends Schema.CollectionType {
 export interface ApiTeacherTeacher extends Schema.CollectionType {
   collectionName: 'teachers';
   info: {
+    description: '';
     displayName: 'Teacher';
     pluralName: 'teachers';
     singularName: 'teacher';
@@ -495,6 +517,11 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
+    classrooms: Attribute.Relation<
+      'api::teacher.teacher',
+      'manyToMany',
+      'api::classroom.classroom'
+    >;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::teacher.teacher',
@@ -502,6 +529,11 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    departments: Attribute.Relation<
+      'api::teacher.teacher',
+      'manyToMany',
+      'api::department.department'
+    >;
     firstName: Attribute.String;
     lastName: Attribute.String;
     phone: Attribute.String;

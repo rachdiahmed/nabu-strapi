@@ -4,7 +4,8 @@
   "info": {
     "singularName": "student",
     "pluralName": "students",
-    "displayName": "Student"
+    "displayName": "Student",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,20 +32,27 @@
       "type": "date"
     },
     "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "student"
+    },
+    "classrooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::classroom.classroom",
+      "inversedBy": "students"
     }
   }
 }

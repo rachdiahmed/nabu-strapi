@@ -38,6 +38,12 @@
       "relation": "manyToMany",
       "target": "api::classroom.classroom",
       "inversedBy": "departments"
+    },
+    "teachers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::teacher.teacher",
+      "mappedBy": "departments"
     }
   }
 }

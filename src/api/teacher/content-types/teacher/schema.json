@@ -4,7 +4,8 @@
   "info": {
     "singularName": "teacher",
     "pluralName": "teachers",
-    "displayName": "Teacher"
+    "displayName": "Teacher",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,20 +22,33 @@
       "type": "string"
     },
     "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "teacher"
+    },
+    "classrooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::classroom.classroom",
+      "inversedBy": "teachers"
+    },
+    "departments": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::department.department",
+      "inversedBy": "teachers"
     }
   }
 }

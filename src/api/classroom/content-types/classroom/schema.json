@@ -32,6 +32,18 @@
       "relation": "manyToMany",
       "target": "api::department.department",
       "mappedBy": "classrooms"
+    },
+    "students": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::student.student",
+      "mappedBy": "classrooms"
+    },
+    "teachers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::teacher.teacher",
+      "mappedBy": "classrooms"
     }
   }
 }
