@@ -70,6 +70,12 @@
       "relation": "manyToMany",
       "target": "api::classroom.classroom",
       "mappedBy": "users_permissions_users"
+    },
+    "student": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::student.student",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
