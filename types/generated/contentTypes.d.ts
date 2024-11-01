@@ -484,6 +484,44 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   };
 }
 
+export interface ApiTeacherTeacher extends Schema.CollectionType {
+  collectionName: 'teachers';
+  info: {
+    displayName: 'Teacher';
+    pluralName: 'teachers';
+    singularName: 'teacher';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::teacher.teacher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    firstName: Attribute.String;
+    lastName: Attribute.String;
+    phone: Attribute.String;
+    photo: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    publishedAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::teacher.teacher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    users_permissions_user: Attribute.Relation<
+      'api::teacher.teacher',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface PluginContentReleasesRelease extends Schema.CollectionType {
   collectionName: 'strapi_releases';
   info: {
@@ -942,6 +980,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'api::student.student'
     >;
+    teacher: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::teacher.teacher'
+    >;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
@@ -971,6 +1014,7 @@ declare module '@strapi/types' {
       'api::classroom.classroom': ApiClassroomClassroom;
       'api::department.department': ApiDepartmentDepartment;
       'api::student.student': ApiStudentStudent;
+      'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

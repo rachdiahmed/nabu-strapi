@@ -76,6 +76,12 @@
       "relation": "oneToOne",
       "target": "api::student.student",
       "mappedBy": "users_permissions_user"
+    },
+    "teacher": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::teacher.teacher",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
